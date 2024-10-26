@@ -1,0 +1,1 @@
+# shoot_people_of_map.github.io
