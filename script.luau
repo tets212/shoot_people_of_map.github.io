@@ -14,6 +14,7 @@ local startPos = nil
 
 local function createESP(targetPlayer)
     if targetPlayer.Character and not targetPlayer.Character:FindFirstChildOfClass("Highlight") then
+while true do
         local highlight = Instance.new("Highlight")
         highlight.FillColor = Color3.new(1, 0, 0)
         highlight.FillTransparency = 0.5
@@ -21,6 +22,7 @@ local function createESP(targetPlayer)
         highlight.OutlineTransparency = 0
         highlight.Adornee = targetPlayer.Character
         highlight.Parent = targetPlayer.Character
+end
     end
 end
 
