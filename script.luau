@@ -14,8 +14,6 @@ local startPos = nil
 
 local function createESP(targetPlayer)
     if targetPlayer.Character and not targetPlayer.Character:FindFirstChildOfClass("Highlight") then
-while true do
-wait(3)
         local highlight = Instance.new("Highlight")
         highlight.FillColor = Color3.new(1, 0, 0)
         highlight.FillTransparency = 0.5
@@ -23,18 +21,19 @@ wait(3)
         highlight.OutlineTransparency = 0
         highlight.Adornee = targetPlayer.Character
         highlight.Parent = targetPlayer.Character
-end
     end
 end
 
 local function toggleESP()
     espEnabled = not espEnabled
     for _, targetPlayer in pairs(players:GetPlayers()) do
-        local highlight = targetPlayer.Character and targetPlayer.Character:FindFirstChildOfClass("Highlight")
-        if highlight then
-            highlight.Enabled = espEnabled
-        elseif espEnabled then
+        if espEnabled then
             createESP(targetPlayer)
+        else
+            local highlight = targetPlayer.Character and targetPlayer.Character:FindFirstChildOfClass("Highlight")
+            if highlight then
+                highlight.Enabled = false
+            end
         end
     end
 end
@@ -203,9 +202,11 @@ players.PlayerAdded:Connect(function(targetPlayer)
 end)
 
 for _, targetPlayer in pairs(players:GetPlayers()) do
-    if targetPlayer.Character and espEnabled then
-        createESP(targetPlayer)
-    end
+    targetPlayer.CharacterAdded:Connect(function()
+        if espEnabled then
+            createESP(targetPlayer)
+        end
+    end)
 end
 
 runService.RenderStepped:Connect(function()
