@@ -15,6 +15,7 @@ local startPos = nil
 local function createESP(targetPlayer)
     if targetPlayer.Character and not targetPlayer.Character:FindFirstChildOfClass("Highlight") then
 while true do
+wait(3)
         local highlight = Instance.new("Highlight")
         highlight.FillColor = Color3.new(1, 0, 0)
         highlight.FillTransparency = 0.5
